@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function SideLink({href, name}){
   return(
-    <a href={href} className='hover:bg-white hover:text-black pl-3 py-2'>{name}</a>
+    <a href={href} className='hover:bg-white hover:text-black pl-3 py-3 font-semibold'>{name}</a>
   )
 }
 
@@ -14,7 +14,7 @@ SideLink.propTypes = {
 
 function DashboardSidebar() {
   return (
-    <div className="h-screen w-64 bg-gray-800 text-white">
+    <div className="h-screen w-48 bg-gray-800 text-white">
       
       <nav className="flex flex-col text-xl">
         <SideLink href="/dashboard" name="Dashboard"></SideLink>
