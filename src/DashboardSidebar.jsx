@@ -1,17 +1,26 @@
 // import React from 'react';
+import PropTypes from 'prop-types';
+
+function SideLink({href, name}){
+  return(
+    <a href={href} className='hover:bg-white hover:text-black pl-3 py-2'>{name}</a>
+  )
+}
+
+SideLink.propTypes = {
+  href: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 function DashboardSidebar() {
   return (
-    <div className="h-screen w-64 bg-gray-800 text-white p-4">
+    <div className="h-screen w-64 bg-gray-800 text-white">
       
-      <nav>
-        <ul className="flex flex-col gap-y-4 text-xl">
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/dashboard/communities">Communities</a></li>
-            <li><a href="/dashboard/hangout">Hangout</a></li>
-            <li><a href="/dashboard/friends">Friends</a></li>
-            {/* Add more navigation links here */}
-        </ul>
+      <nav className="flex flex-col text-xl">
+        <SideLink href="/dashboard" name="Dashboard"></SideLink>
+        <SideLink href="/dashboard/communities" name="Communities"></SideLink>
+        <SideLink href="/dashboard/hangout" name="Hangout"></SideLink>
+        <SideLink href="/dashboard/friends" name="Friends"></SideLink>
       </nav>
     </div>
   );
