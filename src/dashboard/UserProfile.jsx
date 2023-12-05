@@ -18,31 +18,31 @@ ProfileHeader.propTypes = {
 
 function ProfileHeader({editedUser,  isEditing, handleInputChange}){
 	return(
-		<div className='flex gap-x-4'>
+		<div className='flex gap-x-4 text-xl'>
 			<img className="w-16 h-16 rounded-full"
 			src={editedUser.profilePicture}
 			alt="Profile"
 			/>
 			<div>
 				{isEditing ? (
-				<div>
+				<div className='flex flex-col gap-y-2 w-[300px]'>
 					<input
 						type="text"
 						name="username"
 						value={editedUser.username}
 						onChange={handleInputChange}
-						className="border-b border-gray-300 focus:outline-none focus:border-blue-500"
+						className="border-b border-gray-300 focus:border-blue-500"
 					/>
-					<textarea
+					<input
 						name="bio"
 						value={editedUser.bio}
 						onChange={handleInputChange}
-						className="text-gray-500 resize-none border-b border-gray-300 focus:outline-none focus:border-blue-500"
+						className="text-gray-500 resize-none border-b border-gray-300 focus:border-blue-500"
 					/>
 				</div>
 				) : (
 				<div>
-					<h2 className="text-xl font-semibold">
+					<h2 className="text-2xl font-semibold">
 						{editedUser.username}
 					</h2>
 					<p className="text-gray-500">{editedUser.bio}</p>
@@ -90,22 +90,25 @@ function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, hand
 	return(
 		<div className='flex flex-col gap-y-2'>
 			{fields.map(field => (
-				<p key={field.value}>
-				<strong>{field.label}: </strong>
+				<div key={field.value} className='flex justify-between text-xl'>
+					<label className="font-bold">{field.label}:</label>
 					{isEditing ? (
 					<input
 						type="text"
 						name={field.value}
-						value={editedUser[field.value]}
+						value={field.isList ? editedUser[field.value].join(', ') : editedUser[field.value]}
 						onChange={handleInputChange}
+						className='w-[257px]'
 					/>
 					) : (
-						field.isList ? editedUser[field.value].join(', ') : editedUser[field.value]
+					<p className='w-[210px]'>
+						{field.isList ? editedUser[field.value].join(', ') : editedUser[field.value]}
+					</p>
 					)}
-				</p>
+				</div>
 			))}
 			{isEditing ? (
-			<div className="mt-4">
+			<div className="mt-4 text-xl">
 				<button onClick={handleSave}
 				className="bg-blue-500 text-white px-3 py-1 rounded-md mr-2"
 				>
@@ -119,7 +122,7 @@ function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, hand
 			</div>
 			) : (
 			<button onClick={handleEdit}
-				className="mt-4 bg-gray-300 text-gray-700 px-3 py-1 rounded-md">
+				className="mt-4 text-xl bg-gray-300 text-gray-700 px-3 py-1 rounded-md">
 				Edit Profile
 			</button>
 			)}
@@ -177,20 +180,26 @@ function UserProfile() {
         <DashboardNavbar/>
         <div className="flex space-x-4 space-y-4">
             <DashboardSidebar></DashboardSidebar>
-			<div className='h-fit flex flex-col gap-y-5 p-5 border-2 rounded-lg'>
-				<ProfileHeader
-					editedUser={editedUser}
-					isEditing={isEditing}
-					handleInputChange={handleInputChange}
-				/>
-				<ProfileBody
-					editedUser={editedUser}
-					isEditing={isEditing}
-					handleEdit={handleEdit}
-					handleSave={handleSave}
-					handleCancel={handleCancel}
-				/>
-			</div>            
+			<div className='flex justify-center items-center w-full'>
+				<div className='flex flex-col justify-center'>
+					<h1 className='text-center text-3xl font-bold mb-7'>Your Profile</h1>
+					<div className='h-fit w-[450px] flex flex-col gap-y-3 p-5 border-2 rounded-lg'>
+						<ProfileHeader
+							editedUser={editedUser}
+							isEditing={isEditing}
+							handleInputChange={handleInputChange}
+						/>
+						<div className='border'></div>
+						<ProfileBody
+							editedUser={editedUser}
+							isEditing={isEditing}
+							handleEdit={handleEdit}
+							handleSave={handleSave}
+							handleCancel={handleCancel}
+						/>
+					</div>
+				</div>
+			</div>  
         </div>
 		<Footer></Footer>
     </div>
