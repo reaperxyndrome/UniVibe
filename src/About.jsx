@@ -1,5 +1,44 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer"
+
+function Testimonials() {
+	const testimonials = [
+		{
+		name: 'John Doe',
+		testimonial: 'This website is amazing! I have made so many new friends.',
+		},
+		{
+			name: 'John Doe',
+			testimonial: 'This website is amazing! I have made so many new friends.',
+		},
+		{
+		name: 'Jane Smith',
+		testimonial: 'I love this website. It has helped me find like-minded individuals.',
+		},
+		// Add more testimonials as needed
+	];
+
+	return (
+		<div className="flex flex-col items-center mt-10 mb-10">
+			<h2 className="text-3xl font-semibold mb-8">Testimonials</h2>
+			<div className="flex">
+				{testimonials.map((testimonial, index) => (
+					<div key={index} className="w-[240px] mb-4">
+						<p className="text-lg font-bold">{testimonial.name}</p>
+						<p className="text-lg">{testimonial.testimonial}</p>
+					</div>
+				))}
+			</div>
+			<div className="mt-4">
+				<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+					<a href="/signup">Join Us Now</a>
+				</button>
+			</div>
+			
+		</div>
+	);
+}
+  
 function About() {
 	return (
 		<div className="flex flex-col min-h-screen bg-black text-white">
@@ -16,6 +55,7 @@ function About() {
 			Thank you for being a part of our community!
 			</p>
 		</main>
+		<Testimonials></Testimonials>
 		<Footer></Footer>
 		</div>
 	);
