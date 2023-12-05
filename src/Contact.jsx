@@ -3,7 +3,7 @@ import Footer from "./Footer";
 
 function ContactForm() {
 	return(
-		<div className="mt-8">
+		<div className="w-[600px] mx-auto mt-20 mb-12">
 			<h3 className="text-xl font-semibold mb-4">Send us a message</h3>
 			<form>
 				<div className="mb-4">
