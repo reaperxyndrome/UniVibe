@@ -8,7 +8,8 @@ import Contact from './Contact';
 import SignUp from "./SignUp";
 import About from './About';
 import SignIn from './SignIn';
-import SocialDashboard from './Dashboard';
+import Dashboard from './Dashboard';
+import UserProfile from './UserProfile';
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
         <Route path='/contact' element={<Contact/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
         <Route path='/signin' element={<SignIn/>}></Route>
-        <Route path='/dashboard' element={<SocialDashboard/>}></Route>
+        <Route path='/dashboard' element={<Dashboard/>}></Route>
+        <Route path='/dashboard/profile' element={<UserProfile/>}/>
       </Routes>
     </>
     
