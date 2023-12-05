@@ -8,8 +8,8 @@ import Contact from './Contact';
 import SignUp from "./SignUp";
 import About from './About';
 import SignIn from './SignIn';
-import Dashboard from './Dashboard';
-import UserProfile from './UserProfile';
+import Dashboard from './dashboard/Dashboard';
+import UserProfile from './dashboard/UserProfile';
 
 function App() {
 
