@@ -100,6 +100,12 @@ function SignUp() {
                 Sign Up
                 </button>
             </div>
+            <div className="mt-2">
+                Already have an account?
+                <a href="/signin" className="text-indigo-600 hover:text-indigo-500">
+                     Sign In
+                </a>
+            </div>
             </form>
         </main>
         <Footer></Footer>
