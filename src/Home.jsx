@@ -1,5 +1,6 @@
-import Navbar from "./Navbar"
+import Navbar from "./StaticNavbar"
 import Footer from "./Footer"
+import Testimonials from "./Testimonials";
 function Hero() {
     return (
         <div className="bg-blue-600 text-white">
@@ -64,6 +65,7 @@ function Home(){
 			<Navbar></Navbar>
 			<Hero></Hero>
 			<Features></Features>
+            <Testimonials></Testimonials>
 			<Footer></Footer>   
 		</div>
 	)
