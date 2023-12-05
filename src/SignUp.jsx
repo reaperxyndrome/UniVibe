@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./StaticNavbar";
 import Footer from "./Footer";
 function SignUp() {
     const [formData, setFormData] = useState({
