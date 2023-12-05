@@ -3,12 +3,14 @@
 function DashboardSidebar() {
   return (
     <div className="h-screen w-64 bg-gray-800 text-white p-4">
-      <h1 className="text-xl font-bold mb-4">Dashboard</h1>
+      
       <nav>
-        <ul>
-          <li><a href="/dashboard/profile">Profile</a></li>
-          <li><a href="/dashboard/settings">Settings</a></li>
-          {/* Add more navigation links here */}
+        <ul className="flex flex-col gap-y-4 text-xl">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/dashboard/communities">Communities</a></li>
+            <li><a href="/dashboard/hangout">Hangout</a></li>
+            <li><a href="/dashboard/friends">Friends</a></li>
+            {/* Add more navigation links here */}
         </ul>
       </nav>
     </div>
