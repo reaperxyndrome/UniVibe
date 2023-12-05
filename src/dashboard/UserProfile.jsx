@@ -68,55 +68,42 @@ ProfileBody.propTypes = {
 	}).isRequired,
 	isEditing: PropTypes.bool.isRequired,
 	handleEdit: PropTypes.func.isRequired,
+	handleInputChange: PropTypes.func.isRequired,
 	handleSave: PropTypes.func.isRequired,
 	handleCancel: PropTypes.func.isRequired,
 }
 
 
-function ProfileBody({editedUser, isEditing, handleEdit, handleSave, handleCancel}){
+function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, handleSave, handleCancel}){
+	const fields = [
+		{ label: 'Binusian ID', value: 'binusian_id' },
+		{ label: 'Major', value: 'major' },
+		{ label: 'Binus branch', value: 'binus_branch' },
+		{ label: 'Date of Birth', value: 'dateOfBirth' },
+		{ label: 'Joined at', value: 'joinedDate' },
+		{ label: 'Email', value: 'email' },
+		{ label: 'Password', value: 'password' },
+		{ label: 'Location', value: 'location' },
+		{ label: 'Interests', value: 'interests', isList: true },
+		{ label: 'Age', value: 'age' },
+	];
 	return(
 		<div className='flex flex-col gap-y-2'>
-			<p>
-				<strong>Binusian ID: </strong>
-				{editedUser.binusian_id}
-			</p>
-			<p>
-				<strong>Major: </strong>
-				{editedUser.major}
-			</p>
-			<p>
-				<strong>Binus branch: </strong>
-				{editedUser.binus_branch}
-			</p>
-			<p>
-				<strong>Date of Birth: </strong>
-				{editedUser.dateOfBirth}
-			</p>
-			<p>
-				<strong>Joined at: </strong>
-				{editedUser.joinedDate}
-			</p>
-			<p>
-				<strong>Email: </strong>
-				{editedUser.email}
-			</p>
-			<p>
-				<strong>Password: </strong>
-				{editedUser.password}
-			</p>
-			
-			<p>
-				<strong>Location: </strong>
-				{editedUser.location}
-			</p>
-			<p>
-				<strong>Interests: </strong>{' '}
-				{editedUser.interests.join(', ')}
-			</p>
-			<p>
-				<strong>Age: </strong>
-				{editedUser.age}
-			</p>
+			{fields.map(field => (
+				<p key={field.value}>
+				<strong>{field.label}: </strong>
+					{isEditing ? (
+					<input
+						type="text"
+						name={field.value}
+						value={editedUser[field.value]}
+						onChange={handleInputChange}
+					/>
+					) : (
+						field.isList ? editedUser[field.value].join(', ') : editedUser[field.value]
+					)}
+				</p>
+			))}
 			{isEditing ? (
 			<div className="mt-4">
 				<button onClick={handleSave}
