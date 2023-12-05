@@ -9,6 +9,7 @@ import Home from './Home';
 import Contact from './Contact';
 import SignUp from "./SignUp";
 import About from './About';
+import SignIn from './SignIn';
 
 function Hero() {
     return (
@@ -37,6 +38,7 @@ function App() {
         <Route path='/about' element={<About/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
+        <Route path='/signin' element={<SignIn/>}></Route>
       </Routes>
     </>
     
