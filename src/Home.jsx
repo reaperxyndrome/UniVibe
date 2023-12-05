@@ -25,27 +25,31 @@ function Features() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center bg-white p-6 rounded-lg shadow-md">
+                <img src="\friend-icon.svg"></img>
                 <h3 className="text-xl font-semibold mb-4">Hangout</h3>
                 <p className="text-gray-600 mb-4">
                 Hangout with friends and socialize in a fun environment.
                 </p>
             </div>
             <div className="text-center bg-white p-6 rounded-lg shadow-md">
+                <img src="/calendar-icon.svg"></img>
                 <h3 className="text-xl font-semibold mb-4">Meetup</h3>
                 <p className="text-gray-600 mb-4">
                 Plan and attend meetups with like-minded individuals.
                 </p>
             </div>
             <div className="text-center bg-white p-6 rounded-lg shadow-md">
+                <img src="\chat-icon.svg"></img>
                 <h3 className="text-xl font-semibold mb-4">Chat</h3>
                 <p className="text-gray-600 mb-4">
                 Connect and communicate through instant messaging.
                 </p>
             </div>
             <div className="text-center bg-white p-6 rounded-lg shadow-md">
+                <img src="\group.svg"></img>
                 <h3 className="text-xl font-semibold mb-4">Create Groups</h3>
                 <p className="text-gray-600 mb-4">
-                Form groups based on common interests and activities.
+                    Form groups based on common interests and activities.
                 </p>
             </div>
             </div>
