@@ -3,6 +3,7 @@ import Navbar from "./StaticNavbar";
 import Footer from "./Footer";
 import { auth } from "./firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function Test() {
     const [formData, setFormData] = useState({
@@ -36,6 +37,7 @@ function Test() {
 
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
+    const navigate= useNavigate();
 
     const signin =(e)=>{
         //
@@ -49,6 +51,7 @@ function Test() {
         }).catch((error) => {
             console.log(error);
         });
+        navigate('/dashboard');
     }
 
     return (
@@ -66,7 +69,7 @@ function Test() {
                 name="email"
                 id="email"
                 value={email}
-                onChange={handleChange}
+                onChange={(e)=>setEmail(e.target.value)}
                 className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
@@ -80,7 +83,7 @@ function Test() {
                 name="password"
                 id="password"
                 value={password}
-                onChange={handleChange}
+                onChange={(e)=>setPassword(e.target.value)}
                 className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
