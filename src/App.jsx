@@ -9,8 +9,6 @@ import SignUp from "./SignUp";
 import About from './About';
 import SignIn from './SignIn';
 import SocialDashboard from './Dashboard';
-import Test from './test';
-import Test2 from './testSU';
 
 function App() {
 
@@ -24,9 +22,6 @@ function App() {
         <Route path='/signup' element={<SignUp/>}></Route>
         <Route path='/signin' element={<SignIn/>}></Route>
         <Route path='/dashboard' element={<SocialDashboard/>}></Route>
-        {/* test goes to sign in , test 2 goes to sign up */}
-        <Route path='/test' element={<Test/>}></Route>
-        <Route path='/test2' element={<Test2/>}></Route>
       </Routes>
     </>
     
