@@ -10,6 +10,7 @@ import About from './About';
 import SignIn from './SignIn';
 import Dashboard from './dashboard/Dashboard';
 import UserProfile from './dashboard/UserProfile';
+import NotificationPage from './dashboard/Notification';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/signin' element={<SignIn/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/dashboard/profile' element={<UserProfile/>}/>
+        <Route path='/dashboard/notification' element={<NotificationPage/>}/>
       </Routes>
     </>
     
