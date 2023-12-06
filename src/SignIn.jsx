@@ -1,6 +1,10 @@
 import { useState } from "react";
 import Navbar from "./StaticNavbar";
 import Footer from "./Footer";
+import { auth } from "./firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 function SignIn() {
     const [formData, setFormData] = useState({
         fullName: '',
@@ -30,12 +34,32 @@ function SignIn() {
         });
     };
 
+
+    const [email, setEmail] = useState(''); 
+    const [password, setPassword] = useState('');
+    const navigate= useNavigate();
+
+    const signin =(e)=>{
+        //
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+            console.log(user);
+        }).catch((error) => {
+            console.log(error);
+        });
+        navigate('/dashboard');
+    }
+
     return (
         <div className="flex flex-col min-h-screen bg-black text-white">
         <Navbar></Navbar>
         <main className="flex flex-col items-center flex-grow w-[480px] mx-auto mt-10 px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold mb-8">Sign In</h2>
-            <form onSubmit={handleSubmit} className="w-full space-y-6">
+            <form onSubmit={signin} className="w-full space-y-6">
             <div>
                 <label htmlFor="email" className="block text-sm font-medium text-white">
                 Email address
@@ -44,8 +68,8 @@ function SignIn() {
                 type="email"
                 name="email"
                 id="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
                 className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
@@ -58,8 +82,8 @@ function SignIn() {
                 type="password"
                 name="password"
                 id="password"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
