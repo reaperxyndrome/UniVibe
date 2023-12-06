@@ -56,25 +56,21 @@ function Test2() {
         }).catch((error) => {
             console.log(error);
         });
+        navigate('/dashboard');
         // TODO unable to redirect to dashboard 
         //(cannot call redirect function after submitting form)
-        useEffect(()=>{
-            const unsubscribe= onAuthStateChanged(auth, (user) => {
-                setCurrentUser(user)
-                setLoading(false)
-            })
-              return unsubscribe;
-        },[])
+        // useEffect(()=>{
+        //     const unsubscribe= onAuthStateChanged(auth, (user) => {
+        //         setCurrentUser(user)
+        //         setLoading(false)
+        //     })
+        //       return unsubscribe;
+        // },[])
     
-        function redirect(user){
-            if(user!=null){
-                navigate('/dashboard')
-            }
-        }
+        
 
-        return redirect()
+        //return redirect()
     }
-
 
 
     return (
