@@ -9,6 +9,7 @@ import { set } from "firebase/database";
 
 
 function SignUp() {
+    // wololololololo
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
