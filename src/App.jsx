@@ -15,7 +15,6 @@ import NotificationPage from './dashboard/Notification';
 function App() {
 
   return (
-    // <Router>
     <>
       <Routes>
         <Route path="/" element={<Home/>} />
