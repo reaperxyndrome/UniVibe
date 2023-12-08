@@ -13,12 +13,12 @@ import { json } from "react-router-dom";
 //TODO fix firebase connection error
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: "univibe-c75b3.firebaseapp.com",
-  projectId: "univibe-c75b3",
-  storageBucket: "univibe-c75b3.appspot.com",
-  messagingSenderId: "1086854947676",
-  appId: "1:1086854947676:web:fe6fbffedaafb1d24cd799",
-  measurementId: "G-RPP2GP2K11"
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
