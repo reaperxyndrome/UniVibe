@@ -12,6 +12,8 @@ import Dashboard from './dashboard/Dashboard';
 import UserProfile from './dashboard/UserProfile';
 import NotificationPage from './dashboard/Notification';
 import Hangout from './dashboard/Hangout';
+import NewMeeting from './dashboard/Newhangout';
+import NewHangout from './dashboard/Newhangout';
 
 function App() {
   // something
@@ -27,6 +29,7 @@ function App() {
         <Route path='/dashboard/profile' element={<UserProfile/>}/>
         <Route path='/dashboard/notification' element={<NotificationPage/>}/>
         <Route path='/dashboard/hangout' element={<Hangout/>}/>
+        <Route path='/dashboard/newHangout' element={<NewHangout/>}/>
       </Routes>
     </>
     
