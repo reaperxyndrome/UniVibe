@@ -1,4 +1,5 @@
 // import * as React from "react";
+import { Link } from 'react-router-dom';
 
 export default function Hangout() {
     return (
@@ -134,9 +135,13 @@ export default function Hangout() {
                 MPLS sabtu
               </div>
             </div>
-            <div className="text-white text-center text-xs font-bold tracking-wider uppercase whitespace-nowrap bg-blue-600 justify-center items-stretch mt-10 px-10 py-4 rounded-3xl max-md:px-5">
-              Host
-            </div>
+            
+            {/* Host button that navigates to the Dashboard */}
+            <Link to="/dashboard">
+              <div className="text-white text-center text-xs font-bold tracking-wider uppercase whitespace-nowrap bg-blue-600 justify-center items-stretch mt-10 px-10 py-4 rounded-3xl max-md:px-5 cursor-pointer">
+                Host
+              </div>
+            </Link>
           </div>
         </div>
       );
