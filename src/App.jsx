@@ -13,7 +13,6 @@ import UserProfile from './dashboard/UserProfile';
 import NotificationPage from './dashboard/Notification';
 import Communities from './dashboard/Communities';
 import Hangout from './dashboard/Hangout';
-import NewMeeting from './dashboard/Newhangout';
 import NewHangout from './dashboard/Newhangout';
 
 function App() {
@@ -29,6 +28,8 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/dashboard/profile' element={<UserProfile/>}/>
         <Route path='/dashboard/notification' element={<NotificationPage/>}/>
+        <Route path='/dashboard/communities' element={<Communities/>}/>
+        <Route path='/dashboard/hangout' element={<Hangout/>}/>
       </Routes>
     </>
     
