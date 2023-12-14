@@ -37,17 +37,17 @@ function Contact() {
 			<div className="flex flex-col md:flex-row items-center justify-between">
 			<div className="w-full md:w-1/2 mb-6 md:mb-0">
 				<h3 className="text-xl font-semibold mb-4">Email</h3>
-				<p className="text-gray-600">info@example.com</p>
+				<p className="text-gray-600">univibe8@gmail.com</p>
 			</div>
 			<div className="w-full md:w-1/2">
-				<h3 className="text-xl font-semibold mb-4">Phone</h3>
-				<p className="text-gray-600">+1 (123) 456-7890</p>
+				<h3 className="text-xl font-semibold mb-4">Instagram</h3>
+				<p className="text-gray-600">_uni_vibe_</p>
 			</div>
 			</div>
 			<div className="mt-8">
-			<h3 className="text-xl font-semibold mb-4">Address</h3>
+			<h3 className="text-xl font-semibold mb-4">Discord</h3>
 			<p className="text-gray-600">
-				123 Street Name, City, State, Zip Code
+				https://discord.gg/dbbFuQjJr5
 			</p>
 			</div>
 		</main>
