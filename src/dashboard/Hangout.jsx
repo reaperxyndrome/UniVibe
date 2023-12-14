@@ -2,7 +2,7 @@
 
 export default function Hangout() {
     return (
-        <div className="items-center bg-white flex max-w-[1294px] flex-col justify-center px-16 py-11 max-md:px-5 pl-100">
+        <div className="items-center bg-white flex max-w-[1217px] flex-col justify-center mx-auto w-50">
           <div className="flex w-[522px] max-w-full flex-col items-center">
  
             {/* box 1 */}
