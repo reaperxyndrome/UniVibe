@@ -137,7 +137,7 @@ export default function Hangout() {
             </div>
             
             {/* Host button that navigates to the Dashboard */}
-            <Link to="/dashboard">
+            <Link to="/dashboard/newMeeting">
               <div className="text-white text-center text-xs font-bold tracking-wider uppercase whitespace-nowrap bg-blue-600 justify-center items-stretch mt-10 px-10 py-4 rounded-3xl max-md:px-5 cursor-pointer">
                 Host
               </div>
