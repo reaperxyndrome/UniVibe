@@ -14,9 +14,8 @@ import NotificationPage from './dashboard/Notification';
 import Communities from './dashboard/Communities';
 
 function App() {
-
+  // something
   return (
-    // <Router>
     <>
       <Routes>
         <Route path="/" element={<Home/>} />

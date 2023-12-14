@@ -1,4 +1,6 @@
 function Navbar() {
+	// yo
+	
 	return(
 		<nav className="flex justify-between bg-gray-800 p-4">
 		<div className="flex items-center flex-shrink-0 text-white">
