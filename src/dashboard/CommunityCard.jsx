@@ -1,5 +1,3 @@
-import "./CommunityCardStyle.css";
-
 function CommunityCard(){
     return(
         <div className="flex flex-col items-center rounded-lg shadow-md bg-[antiquewhite] w-56 p-5">
