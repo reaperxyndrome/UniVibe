@@ -1,24 +1,7 @@
-// import * as React from "react";
-// import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import HangoutModal from './HangoutModal';
-import DashboardNavbar from "./DashboardNavbar";
-import DashboardSidebar from "./DashboardSidebar";
-import Footer from "../Footer";
-import Hangoutlist from './HangoutList';
 
-export default function Hangout() {
-  const [showModal, setShowModal] = useState(false);
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
+export default function Hangoutlist() {
 
-    return (
-      <div>
-          <DashboardNavbar></DashboardNavbar>
-          <DashboardSidebar></DashboardSidebar>
-          <div className="flex w-[522px] max-w-full flex-col items-center mx-auto w-50">
-            {/* box 1 */}
-            <div className="flex-col fill-gray-800 overflow-hidden relative flex min-h-[99px] w-full items-stretch mt-3 pl-3.5 pr-6 py-2 max-md:max-w-full max-md:pr-5">
+<div className="flex-col fill-gray-800 overflow-hidden relative flex min-h-[99px] w-full items-stretch mt-3 pl-3.5 pr-6 py-2 max-md:max-w-full max-md:pr-5">
               <img
                 loading="lazy"
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/6b7d28693f13d9f21c26489d01ef02051bc44cc21475fbe70f7f1a8f83e36d23?apiKey=b1110ce74f26469f8c7944650aef6c79&"
@@ -61,25 +44,4 @@ export default function Hangout() {
               </div>
             </div>
 
-            <Hangoutlist></Hangoutlist>
-            
-            {/* Host button that navigates to the Meeting */}
-            {/* <Link to="/dashboard/HangoutModal">
-              <div
-              className="text-white text-center text-xs font-bold tracking-wider uppercase whitespace-nowrap bg-blue-600 justify-center items-stretch mt-10 px-10 py-4 rounded-3xl max-md:px-5 cursor-pointer"
-              onClick={handleShowModal} // Show the modal when this button is clicked
-              > 
-              Host
-              </div>
-            </Link> */}
-
-            <button onClick={handleShowModal}>Create Host</button>
-            {/* Render the HangoutModal component and pass the show prop */}
-            <HangoutModal show={showModal} onHide={handleCloseModal} />
-          
-        </div>
-        <Footer></Footer>
-        </div>
-      );
-    }    
-
+}
