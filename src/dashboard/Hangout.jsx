@@ -30,7 +30,7 @@ export default function Hangout() {
                   <div className="text-neutral-300 text-xs font-medium whitespace-nowrap mt-2">
                     Due Date
                   </div>
-                  <div className="text-white text-xs font-semibold mt-2.5">
+                  <div className="text-white text-xs font-semibold">
                     10 Oktober, 2023
                   </div>
                 </div>
@@ -38,7 +38,7 @@ export default function Hangout() {
                   <div className="text-neutral-300 text-xs font-medium whitespace-nowrap">
                     Time
                   </div>
-                  <div className="text-white text-xs font-semibold whitespace-nowrap mt-2.5">
+                  <div className="text-white text-xs font-semibold whitespace-nowrap">
                     13.45
                   </div>
                 </div>
@@ -46,7 +46,7 @@ export default function Hangout() {
                   <div className="text-neutral-300 text-xs font-medium">
                     Location
                   </div>
-                  <div className="text-white text-xs font-semibold mt-2.5">
+                  <div className="text-white text-xs font-semibold">
                     Mall Grand Indonesia
                   </div>
                 </div>
