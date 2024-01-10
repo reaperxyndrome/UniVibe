@@ -59,16 +59,41 @@ export default function Hangout() {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
-  const GetCookie = () => {
-    const token = Cookies.get("token");
-    const role = Cookies.get("role");
-    const username  = Cookies.get("username");
-    const cookie = {token, role, username};
-    console.log(cookie)
-    
-    return cookie
+  
+  const GetCookie = async () => {
+    try {
+      const token = Cookies.get("token");
+      const role = Cookies.get("role");
+      const username  = Cookies.get("username");
+      const cookie = {token, role, username};
+      console.log(cookie)
+      const userId = await fetchUserId(username);
+      console.log(userId)
+      return {cookie, userId};
+  } catch (error) {
+      console.error('Error:', error);
+  }
   }
 
+  async function fetchUserId(username) {
+    try {
+        const response = await fetch(`http://localhost:8094/api/v1/user/by-usernames?usernames=${username}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        });
+        const data = await response.json();
+        const userId = data[0].id;
+        console.log('Success:', userId);
+        return userId;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+  }
+    
     return (
       <div className="flex flex-col">
         <DashboardNavbar></DashboardNavbar>
