@@ -9,15 +9,15 @@ function Dashboard() {
       // This is all the elements of the Dashboard page
       <div className="flex flex-col h-screen overflow-hidden bg-gray-100">
           // This is the Dashboard's Navbar which is located at the top of the page
-          <DashboardNavbar></DashboardNavbar>
-          <div className="flex">
+        <DashboardNavbar></DashboardNavbar>
+        <div className="flex">
           // This is the Dashboard's Sidebar which is located at the side of the page
           <DashboardSidebar></DashboardSidebar>
           // This is the Dashboard's components which is located at the center of the page
           <DashboardComponents></DashboardComponents>
-          </div>
+        </div>
           // This is the Dashboard's Footer which is located at the bottom of the page
-          <Footer></Footer>
+        <Footer></Footer>
       </div>
     );
   }

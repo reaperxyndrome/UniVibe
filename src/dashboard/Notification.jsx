@@ -9,6 +9,7 @@ NotificationItem.propTypes = {
     notification: PropTypes.shape({
         id: PropTypes.number,
         type: PropTypes.string,
+        title: PropTypes.string,
         message: PropTypes.string,
     }).isRequired,
     removeNotification: PropTypes.func.isRequired,
@@ -17,25 +18,29 @@ NotificationItem.propTypes = {
 function NotificationItem ({notification, removeNotification}) {
     return(
         <div key={notification.id} 
-        className='bg-[gray] text-white p-5 mb-5 rounded-lg'
+        className='flex flex-col bg-[gray] text-white p-3 mb-5 rounded-lg gap-y-2 w-[40rem]'
         >
-            {notification.message}
+            <h2 className='font-bold'>{notification.title}</h2>
+            <p className='leading-5'>{notification.message}</p>
             <button
+                className='bg-[red] text-white px-3 py-1 rounded-lg w-20 self-end'
                 onClick={() => removeNotification(notification.id)}
-                style={{ marginLeft: '10px' }}
             >
                 Dismiss
             </button>
         </div>
     )
 }
+
+
+
 function NotificationPage() {
     const [notifications, setNotifications] = useState([
         { 
             id: 1, 
             type: 'error', 
             title: 'Error', 
-            message: 'This is an error message', 
+            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt rhoncus nisi, non sollicitudin tortor convallis in. Cras pretium, arcu at mollis fringilla, ex quam faucibus arcu, sed bibendum nibh nibh nec elit.', 
             icon: 'path/to/error/icon.png', 
             timestamp: '2022-01-01 12:00:00' 
         },
@@ -43,9 +48,25 @@ function NotificationPage() {
             id: 2, 
             type: 'success', 
             title: 'Success', 
-            message: 'This is a success message', 
+            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt rhoncus nisi, non sollicitudin tortor convallis in. Cras pretium, arcu at mollis fringilla, ex quam faucibus arcu, sed bibendum nibh nibh nec elit.', 
             icon: 'path/to/success/icon.png', 
-            timestamp: '2022-01-01 12:01:00' 
+            timestamp: '2022-01-02 12:00:00' 
+        },
+        { 
+            id: 3, 
+            type: 'info', 
+            title: 'Info', 
+            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt rhoncus nisi, non sollicitudin tortor convallis in. Cras pretium, arcu at mollis fringilla, ex quam faucibus arcu, sed bibendum nibh nibh nec elit.', 
+            icon: 'path/to/info/icon.png', 
+            timestamp: '2022-01-03 12:00:00' 
+        },
+        { 
+            id: 4, 
+            type: 'warning', 
+            title: 'Warning', 
+            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt rhoncus nisi, non sollicitudin tortor convallis in. Cras pretium, arcu at mollis fringilla, ex quam faucibus arcu, sed bibendum nibh nibh nec elit.', 
+            icon: 'path/to/warning/icon.png', 
+            timestamp: '2022-01-04 12:00:00' 
         },
         // Add more notifications here
     ]);
@@ -57,16 +78,17 @@ function NotificationPage() {
   return (
     <div>
         <DashboardNavbar />
-        <div className='flex'>
+        <div className='flex h-screen'>
             <DashboardSidebar/>
-            <div>
-            {notifications.map(notification => (
-                <NotificationItem
-                    key={notification.id}
-                    notification={notification}
-                    removeNotification={removeNotification}>
-                </NotificationItem>
-            ))}
+            <div className='flex flex-col items-center overflow-scroll w-screen p-10'>
+                <h1 className='text-3xl font-bold mb-10'>Notifications</h1>
+                {notifications.map(notification => (
+                    <NotificationItem
+                        key={notification.id}
+                        notification={notification}
+                        removeNotification={removeNotification}
+                    />
+                ))}
             </div>
         </div>
         <Footer/>
