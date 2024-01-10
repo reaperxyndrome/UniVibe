@@ -5,6 +5,7 @@ import HangoutModal from './HangoutModal';
 import DashboardNavbar from "./DashboardNavbar";
 import DashboardSidebar from "./DashboardSidebar";
 import Footer from "../Footer";
+import Cookies from "js-cookie";
 
 const HangoutCard = () => {
   return(
@@ -58,6 +59,15 @@ export default function Hangout() {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+  const GetCookie = () => {
+    const token = Cookies.get("token");
+    const role = Cookies.get("role");
+    const username  = Cookies.get("username");
+    const cookie = {token, role, username};
+    console.log(cookie)
+    
+    return cookie
+  }
 
     return (
       <div className="flex flex-col">
@@ -72,6 +82,7 @@ export default function Hangout() {
             <HangoutCard></HangoutCard>
             <HangoutCard></HangoutCard>
             <button className="rounded-md focus:outline-none text-white text-base md:text-xl px-4 py-3 md:px-6 md:py-4 mx-auto mt-2 bg-blue-800 cursor-pointer" onClick={handleShowModal}>Create Host</button>
+            <button onClick={GetCookie}>get cookie</button>
             <HangoutModal show={showModal} onHide={handleCloseModal} />
         
           </div>
