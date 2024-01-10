@@ -10,7 +10,8 @@ function Hero() {
                     Discover amazing features and explore what we have to offer!
                 </p>
                 <button className="bg-white text-blue-600 py-2 px-4 rounded-md font-semibold hover:bg-blue-100">
-                    Get Started
+                    <a href="/signup">Get Started</a>
+                    
                 </button>
             </div>
         </div>
