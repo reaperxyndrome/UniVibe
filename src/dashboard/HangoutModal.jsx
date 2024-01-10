@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function HangoutModal({ show, onHide }) {
@@ -23,70 +22,160 @@ export default function HangoutModal({ show, onHide }) {
     setFormData({ ...formData, [name]: value });
   };
 
+  // TODO: fix hangout modal bug
+  // bug 1: hangout modal removes scrollbar when showed --done
+  // bug 2: hangout modal is not centered on the screen --done
+  // tips: rewrite to not use bootstrap
   return (
-    <div>
-    <Modal show={show} onHide={onHide}>
-      <Modal.Header closeButton className="text-center">
-        <Modal.Title className=''>New Hangout</Modal.Title> 
-      </Modal.Header>
-      <Modal.Body 
-      className="flex flex-col w-full items-center bg-white rounded-lg shadow-xl p-8 overflow-auto z-50">
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="hangoutName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="date">
-            <Form.Label>Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleInputChange}
-            />
-            </Form.Group>
-          {/* New Form.Group for Time */}
-          <Form.Group controlId="time">
-            <Form.Label>Time</Form.Label>
-            <Form.Control
-              type="text"
-              name="time"
-              value={formData.time}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          {/* New Form.Group for Place */}
-          <Form.Group controlId="place">
-            <Form.Label>Place</Form.Label>
-            <Form.Control
-              type="text"
-              name="place"
-              value={formData.place}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          {/* New Form.Group for Description */}
-          <Form.Group controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Create Hangout
-          </Button>
-        </Form>
-      </Modal.Body>
-    </Modal>
+
+    <div className={`${show ? 'block' : 'hidden'} fixed z-10 inset-0 overflow-y-auto`}>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="bg-white w-full md:w-1/2 lg:w-1/3 rounded-lg shadow-xl p-8">
+          <h2 className="text-center text-2xl font-bold mb-6">New Hangout</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="hangoutName" className="block text-sm font-medium">
+                Name
+              </label>
+              <input
+                type="text"
+                id="hangoutName"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md p-2 w-full mt-1"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="date" className="block text-sm font-medium">
+                Date
+              </label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                value={formData.date}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md p-2 w-full mt-1"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="time" className="block text-sm font-medium">
+                Time
+              </label>
+              <input
+                type="text"
+                id="time"
+                name="time"
+                value={formData.time}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md p-2 w-full mt-1"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="place" className="block text-sm font-medium">
+                Place
+              </label>
+              <input
+                type="text"
+                id="place"
+                name="place"
+                value={formData.place}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md p-2 w-full mt-1"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="description" className="block text-sm font-medium">
+                Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md p-2 w-full mt-1 resize-none"
+                rows="4"
+              ></textarea>
+            </div>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
+              >
+                Create Hangout
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+
+    // <div>
+    // <Modal show={show} onHide={onHide}>
+    //   <Modal.Header closeButton className="text-center">
+    //     <Modal.Title className=''>New Hangout</Modal.Title> 
+    //   </Modal.Header>
+    //   <Modal.Body 
+    //   className="flex flex-col w-full items-center bg-white rounded-lg shadow-xl p-8 h-auto overflow-auto">
+    //     <Form onSubmit={handleSubmit}>
+    //       <Form.Group controlId="hangoutName">
+    //         <Form.Label>Name</Form.Label>
+    //         <Form.Control
+    //           type="text"
+    //           name="name"
+    //           value={formData.name}
+    //           onChange={handleInputChange}
+    //         />
+    //       </Form.Group>
+    //       <Form.Group controlId="date">
+    //         <Form.Label>Date</Form.Label>
+    //         <Form.Control
+    //           type="date"
+    //           name="date"
+    //           value={formData.date}
+    //           onChange={handleInputChange}
+    //         />
+    //         </Form.Group>
+    //       {/* New Form.Group for Time */}
+    //       <Form.Group controlId="time">
+    //         <Form.Label>Time</Form.Label>
+    //         <Form.Control
+    //           type="text"
+    //           name="time"
+    //           value={formData.time}
+    //           onChange={handleInputChange}
+    //         />
+    //       </Form.Group>
+    //       {/* New Form.Group for Place */}
+    //       <Form.Group controlId="place">
+    //         <Form.Label>Place</Form.Label>
+    //         <Form.Control
+    //           type="text"
+    //           name="place"
+    //           value={formData.place}
+    //           onChange={handleInputChange}
+    //         />
+    //       </Form.Group>
+    //       {/* New Form.Group for Description */}
+    //       <Form.Group controlId="description">
+    //         <Form.Label>Description</Form.Label>
+    //         <Form.Control
+    //           as="textarea"
+    //           name="description"
+    //           value={formData.description}
+    //           onChange={handleInputChange}
+    //         />
+    //       </Form.Group>
+
+    //       <Button variant="primary" type="submit">
+    //         Create Hangout
+    //       </Button>
+          
+    //     </Form>
+    //   </Modal.Body>
+    // </Modal>
+    // </div>
   );
 }
 

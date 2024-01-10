@@ -5,7 +5,6 @@ import HangoutModal from './HangoutModal';
 import DashboardNavbar from "./DashboardNavbar";
 import DashboardSidebar from "./DashboardSidebar";
 import Footer from "../Footer";
-import Hangoutlist from './HangoutList';
 
 const HangoutCard = () => {
   return(
@@ -65,7 +64,6 @@ export default function Hangout() {
         <DashboardNavbar></DashboardNavbar>
         
         <div className="flex">
-          {/* box 1 */}
           <DashboardSidebar></DashboardSidebar>
           <div className='flex flex-col w-full items-center'>
             <h1 className='text-2xl font-bold'>Notification</h1>
