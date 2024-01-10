@@ -116,20 +116,20 @@ async function fetchUserId(username) {
   }
 }
 
-const GetCookie = async () => {
-  try {
-    const token = Cookies.get("token");
-    const role = Cookies.get("role");
-    const username  = Cookies.get("username");
-    const cookie = {token, role, username};
-    console.log(cookie)
-    const userId = await fetchUserId(username);
-    console.log(userId)
-    return {cookie, userId};
-  } catch (error) {
-      console.error('Error:', error);
-  }
-}
+// const GetCookie = async () => {
+//   try {
+//     const token = Cookies.get("token");
+//     const role = Cookies.get("role");
+//     const username  = Cookies.get("username");
+//     const cookie = {token, role, username};
+//     console.log(cookie)
+//     const userId = await fetchUserId(username);
+//     console.log(userId)
+//     return {cookie, userId};
+//   } catch (error) {
+//       console.error('Error:', error);
+//   }
+// }
 
 export default function Hangout() {
   const [showModal, setShowModal] = useState(false);
@@ -175,7 +175,7 @@ export default function Hangout() {
             <HangoutCard key={schedule.id} id={schedule.id} title={schedule.title} desc={schedule.description} date={schedule.endAt}></HangoutCard>
           ))}
           <button className="rounded-md focus:outline-none text-white text-base md:text-xl px-4 py-3 md:px-6 md:py-4 mx-auto mt-2 bg-blue-800 cursor-pointer" onClick={handleShowModal}>Create Host</button>
-          <button onClick={GetCookie}>get cookie</button>
+          {/* <button onClick={GetCookie}>get cookie</button> */}
           <HangoutModal show={showModal} onHide={handleCloseModal} />
       
         </div>
