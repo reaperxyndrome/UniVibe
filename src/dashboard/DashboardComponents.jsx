@@ -1,6 +1,12 @@
-import * as React from "react";
+// import * as React from "react";
+import Cookies from "js-cookie"
 
-function DashboardComponents(props) {
+function DashboardComponents() {
+  const handleSignOut = () => {
+    Cookies.remove("token")
+    Cookies.remove("role")
+    Cookies.remove("username")
+  }
   return (
     <div className="px-10">
         <div className="bg-zinc-300 flex flex-col mt-5 pl-4 pr-20 py-3 rounded-xl max-md:max-w-full h-fit max-md:pr-5">
@@ -17,6 +23,7 @@ function DashboardComponents(props) {
             see more
           </div>
         </div>
+        <button onClick={handleSignOut}>sign out</button>
     </div>
   );
   }
