@@ -3,7 +3,7 @@ import Navbar from "./StaticNavbar";
 import Footer from "./Footer";
 
 function SignIn() {
-    // wololo
+    
     const [formData, setFormData] = useState({
         username: '',
         password: '',
