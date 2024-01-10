@@ -13,7 +13,6 @@ import UserProfile from './dashboard/UserProfile';
 import NotificationPage from './dashboard/Notification';
 import Communities from './dashboard/Communities';
 import Hangout from './dashboard/Hangout';
-import NewHangout from './dashboard/Newhangout';
 
 function App() {
   // something
