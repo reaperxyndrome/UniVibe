@@ -10,13 +10,30 @@ import Cookies from "js-cookie";
 import PropTypes from 'prop-types';
 import { useEffect } from "react";
 
-const HangoutCard = ({title="Nobar", desc="Movie night", date="25 Januari, 2024"}) => {
+const HangoutCard = ({id, title="Nobar", desc="Movie night", date="25 Januari, 2024"}) => {
   // Component code here
   HangoutCard.propTypes = {
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   };
+  async function deleteHangout(hangoutId) {
+    try {
+        const response = await fetch(`http://localhost:8096/api/v1/schedule/delete/${hangoutId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const scheduleData = await response;
+        console.log('Delete hangout successful:', scheduleData);
+        // return scheduleData;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+  }
 
   return(
     <div className="flex-col fill-gray-800 overflow-hidden relative flex w-[480px] h-fit items-stretch mt-3 pl-3.5 pr-6 py-2 max-md:max-w-full max-md:pr-5">
@@ -51,15 +68,11 @@ const HangoutCard = ({title="Nobar", desc="Movie night", date="25 Januari, 2024"
             Mall Grand Indonesia
           </div>
         </div>
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/885461b625bfd55a917007c4e9ef65393660c72876d4ab17df5e4f2897c584ae?apiKey=b1110ce74f26469f8c7944650aef6c79&"
-          className="aspect-[3.07] object-contain object-center w-[89px] overflow-hidden self-center shrink-0 max-w-full"
-          />
       </div>
       <div className="relative text-white text-xs font-medium bg-orange-500 justify-center mt-1.5 pl-5 pr-16 py-2.5 rounded-2xl items-start max-md:max-w-full max-md:pr-5">
         {desc}
       </div>
+      <button className='z-10 absolute right-5 top-2' onClick={() => deleteHangout(id)}>❌</button>
     </div>
 
   )
@@ -159,7 +172,7 @@ export default function Hangout() {
         <div className='flex flex-col w-full items-center'>
           <h1 className='text-2xl font-bold'>Meet Up</h1>
           {scheduleData.map((schedule) => (
-            <HangoutCard key={schedule.id} title={schedule.title} desc={schedule.description} date={schedule.endAt}></HangoutCard>
+            <HangoutCard key={schedule.id} id={schedule.id} title={schedule.title} desc={schedule.description} date={schedule.endAt}></HangoutCard>
           ))}
           <button className="rounded-md focus:outline-none text-white text-base md:text-xl px-4 py-3 md:px-6 md:py-4 mx-auto mt-2 bg-blue-800 cursor-pointer" onClick={handleShowModal}>Create Host</button>
           <button onClick={GetCookie}>get cookie</button>
