@@ -3,6 +3,7 @@ import Footer from "./Footer"
 import Testimonials from "./Testimonials";
   
 function About() {
+	// test
 	return (
 		<div className="flex flex-col min-h-screen bg-black text-white">
 		<Navbar></Navbar>
