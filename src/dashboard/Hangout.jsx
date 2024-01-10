@@ -7,7 +7,17 @@ import DashboardSidebar from "./DashboardSidebar";
 import Footer from "../Footer";
 import Cookies from "js-cookie";
 
-const HangoutCard = () => {
+import PropTypes from 'prop-types';
+import { useEffect } from "react";
+
+const HangoutCard = ({title="Nobar", desc="Movie night", date="25 Januari, 2024"}) => {
+  // Component code here
+  HangoutCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  };
+
   return(
     <div className="flex-col fill-gray-800 overflow-hidden relative flex w-[480px] h-fit items-stretch mt-3 pl-3.5 pr-6 py-2 max-md:max-w-full max-md:pr-5">
       <img
@@ -17,12 +27,12 @@ const HangoutCard = () => {
         />
       <div className="relative flex justify-between gap-5 px-0.5 items-start max-md:max-w-full max-md:flex-wrap max-md:justify-center">
         <div className="flex grow basis-[0%] flex-col items-stretch">
-          <div className="text-white text-base font-bold">Nobar</div>
+          <div className="text-white text-base font-bold">{title}</div>
           <div className="text-neutral-300 text-xs font-medium whitespace-nowrap mt-2">
             Due Date
           </div>
           <div className="text-white text-xs font-semibold">
-            10 Oktober, 2023
+            {date}
           </div>
         </div>
         <div className="flex basis-[0%] flex-col items-stretch mt-7 self-end">
@@ -48,87 +58,132 @@ const HangoutCard = () => {
           />
       </div>
       <div className="relative text-white text-xs font-medium bg-orange-500 justify-center mt-1.5 pl-5 pr-16 py-2.5 rounded-2xl items-start max-md:max-w-full max-md:pr-5">
-        film the creator jam 13.45
+        {desc}
       </div>
     </div>
 
   )
 }
 
+async function getSchedules(userId) {
+  try {
+      const response = await fetch(`http://localhost:8096/api/v1/schedule/user/${userId}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          }
+      });
+      const scheduleData = await response.json();
+      console.log('Success:', scheduleData);
+      return scheduleData;
+  } catch (error) {
+      console.error('Error:', error);
+      throw error;
+  }
+}
+
+
+
+async function fetchUserId(username) {
+  try {
+      const response = await fetch(`http://localhost:8094/api/v1/user/by-usernames?usernames=${username}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          }
+      });
+      const data = await response.json();
+      const userId = data[0].id;
+      console.log('Success:', userId);
+      return userId;
+  } catch (error) {
+      console.error('Error:', error);
+      throw error;
+  }
+}
+
+const GetCookie = async () => {
+  try {
+    const token = Cookies.get("token");
+    const role = Cookies.get("role");
+    const username  = Cookies.get("username");
+    const cookie = {token, role, username};
+    console.log(cookie)
+    const userId = await fetchUserId(username);
+    console.log(userId)
+    return {cookie, userId};
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
+
 export default function Hangout() {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+
+  // const [userId, setUserId] = useState('')
+  const [scheduleData, setScheduleData] = useState([])
   
-  const GetCookie = async () => {
-    try {
-      const token = Cookies.get("token");
-      const role = Cookies.get("role");
-      const username  = Cookies.get("username");
-      const cookie = {token, role, username};
-      console.log(cookie)
-      const userId = await fetchUserId(username);
-      console.log(userId)
-      return {cookie, userId};
-  } catch (error) {
-      console.error('Error:', error);
-  }
-  }
-
-  async function fetchUserId(username) {
-    try {
-        const response = await fetch(`http://localhost:8094/api/v1/user/by-usernames?usernames=${username}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            }
-        });
-        const data = await response.json();
-        const userId = data[0].id;
-        console.log('Success:', userId);
-        return userId;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
+  useEffect(() => {
+    const getScheduleDataServer = async () => {
+      try {
+        const username = Cookies.get("username");
+        const userId = await fetchUserId(username);
+        const scheduleData = await getSchedules(userId);
+        setScheduleData(scheduleData);
+        console.log(scheduleData)
+        // setUserId(userId);
+      } catch (error) {
+          console.error('Error:', error);
+      }
     }
-  }
+    getScheduleDataServer()
     
-    return (
-      <div className="flex flex-col">
-        <DashboardNavbar></DashboardNavbar>
-        
-        <div className="flex">
-          <DashboardSidebar></DashboardSidebar>
-          <div className='flex flex-col w-full items-center'>
-            <h1 className='text-2xl font-bold'>Notification</h1>
-            <HangoutCard></HangoutCard>
-            <HangoutCard></HangoutCard>
-            <HangoutCard></HangoutCard>
-            <HangoutCard></HangoutCard>
-            <button className="rounded-md focus:outline-none text-white text-base md:text-xl px-4 py-3 md:px-6 md:py-4 mx-auto mt-2 bg-blue-800 cursor-pointer" onClick={handleShowModal}>Create Host</button>
-            <button onClick={GetCookie}>get cookie</button>
-            <HangoutModal show={showModal} onHide={handleCloseModal} />
-        
-          </div>
-          
-          {/* <Hangoutlist></Hangoutlist> */}
-          
-          {/* Host button that navigates to the Meeting */}
-          {/* <Link to="/dashboard/HangoutModal">
-            <div
-            className="text-white text-center text-xs font-bold tracking-wider uppercase whitespace-nowrap bg-blue-600 justify-center items-stretch mt-10 px-10 py-4 rounded-3xl max-md:px-5 cursor-pointer"
-            onClick={handleShowModal} // Show the modal when this button is clicked
-            > 
-            Host
-            </div>
-          </Link> */}
+    // getSchedules(userId).then(scheduleData => setScheduleData(scheduleData));
+    // console.log(scheduleData)
+  }, [])
 
-          {/* Render the HangoutModal component and pass the show prop */}
-          
+  // const userId = GetUserIdFromCookie().then(userId => userId);
+  // console.log(userId)
+  // const scheduleData = getSchedules(userId).then(scheduleData => scheduleData);
+  // console.log(scheduleData)
+
+  return (
+    <div className="flex flex-col">
+      <DashboardNavbar></DashboardNavbar>
+      
+      <div className="flex">
+        <DashboardSidebar></DashboardSidebar>
+        <div className='flex flex-col w-full items-center'>
+          <h1 className='text-2xl font-bold'>Meet Up</h1>
+          {scheduleData.map((schedule) => (
+            <HangoutCard key={schedule.id} title={schedule.title} desc={schedule.description} date={schedule.endAt}></HangoutCard>
+          ))}
+          <button className="rounded-md focus:outline-none text-white text-base md:text-xl px-4 py-3 md:px-6 md:py-4 mx-auto mt-2 bg-blue-800 cursor-pointer" onClick={handleShowModal}>Create Host</button>
+          <button onClick={GetCookie}>get cookie</button>
+          <HangoutModal show={showModal} onHide={handleCloseModal} />
+      
         </div>
-        <Footer></Footer>
-        </div>
-      );
-    }    
+        
+        {/* <Hangoutlist></Hangoutlist> */}
+        
+        {/* Host button that navigates to the Meeting */}
+        {/* <Link to="/dashboard/HangoutModal">
+          <div
+          className="text-white text-center text-xs font-bold tracking-wider uppercase whitespace-nowrap bg-blue-600 justify-center items-stretch mt-10 px-10 py-4 rounded-3xl max-md:px-5 cursor-pointer"
+          onClick={handleShowModal} // Show the modal when this button is clicked
+          > 
+          Host
+          </div>
+        </Link> */}
+
+        {/* Render the HangoutModal component and pass the show prop */}
+        
+      </div>
+      <Footer></Footer>
+    </div>
+  );
+}    
 
