@@ -5,6 +5,9 @@ import Footer from '../Footer';
 
 import PropTypes from 'prop-types';
 
+// This is defining the prop types for the NotificationItem component.
+// The 'notification' prop is expected to be an object with a specific shape and is required.
+// The 'removeNotification' prop is expected to be a function and is required.
 NotificationItem.propTypes = {
     notification: PropTypes.shape({
         id: PropTypes.number,
@@ -15,6 +18,7 @@ NotificationItem.propTypes = {
     removeNotification: PropTypes.func.isRequired,
 };
 
+// This is the NotificationItem functional component. It takes two props: 'notification' and 'removeNotification'.
 function NotificationItem ({notification, removeNotification}) {
     return(
         <div key={notification.id} 

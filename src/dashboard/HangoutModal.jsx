@@ -63,26 +63,26 @@ export default function HangoutModal({ show, onHide }) {
     // The modal is shown or hidden based on the state of 'show'.
     // The modal is positioned fixed and covers the entire screen (inset-0). The content of the modal scrolls if it overflows (overflow-y-auto).
     <div className={`${show ? 'block' : 'hidden'} fixed z-10 inset-0 overflow-y-auto`}>
-      // Centers its children both vertically and horizontally
+      {/* Centers its children both vertically and horizontally */}
       <div className="flex items-center justify-center min-h-screen">
-      // The modal box. It has a white background, rounded corners, and a shadow. It takes up the full width on small screens, half the width on medium screens, and a third of the width on large screens.
+      {/* The modal box. It has a white background, rounded corners, and a shadow. It takes up the full width on small screens, half the width on medium screens, and a third of the width on large screens. */}
         <div className="bg-white w-full md:w-1/2 lg:w-1/3 rounded-lg shadow-xl p-8">
-          // This is the title of the modal
+          {/* This is the title of the modal */}
           <h2 className="text-center text-2xl font-bold mb-6">New Hangout</h2>
-          // Form that users fills out to create a new hangout
+          {/* Form that users fills out to create a new hangout */}
           <form onSubmit={handleSubmit}>
-            // Contains the input fields for the hangout name, date, time, place, and description
+            {/* Contains the input fields for the hangout name, date, time, place, and description */}
             <div className="mb-4">
-              // The label for the hangout name input field
+              {/* The label for the hangout name input field */}
               <label htmlFor="hangoutName" className="block text-sm font-medium">
                 Name
               </label>
-              // The input field for the hangout name
-              // The type of the input is text
-              // The id and name of the input field are both 'hangoutName'
-              // The current value of the input field is formData.name
-              // When the input field changes, handleInputChange is called
-              // The input field has some CSS classes for styling
+              {/* The input field for the hangout name
+              The type of the input is text
+              The id and name of the input field are both 'hangoutName'
+              The current value of the input field is formData.name
+              When the input field changes, handleInputChange is called
+              The input field has some CSS classes for styling */}
               <input
                 type="text"
                 id="hangoutName"
@@ -93,16 +93,16 @@ export default function HangoutModal({ show, onHide }) {
               />
             </div>
             <div className="mb-4">
-              // The label for the date input field
+              {/* The label for the date input field */}
               <label htmlFor="date" className="block text-sm font-medium">
                 Date
               </label>
-              // The input field for the date
-              // The type of the input is date
-              // The id and name of the input field are both 'date'
-              // The current value of the input field is formData.date
-              // When the input field changes, handleInputChange is called
-              // The input field has some CSS classes for styling
+              {/* The input field for the date
+              The type of the input is date
+              The id and name of the input field are both 'date'
+              The current value of the input field is formData.date
+              When the input field changes, handleInputChange is called
+              The input field has some CSS classes for styling */}
               <input
                 type="date"
                 id="date"
@@ -112,18 +112,18 @@ export default function HangoutModal({ show, onHide }) {
                 className="border border-gray-300 rounded-md p-2 w-full mt-1"
               />
             </div>
-            // Contains the input file for time
+            {/* Contains the input file for time */}
             <div className="mb-4">
-              // The label for the time input field
+              {/* The label for the time input field */}
               <label htmlFor="time" className="block text-sm font-medium">
                 Time
               </label>
-              // The input field for the time
-              // The type of the input is text
-              // The id and name of the input field are both 'time'
-              // The current value of the input field is formData.time
-              // When the input field changes, handleInputChange is called
-              // The input field has some CSS classes for styling
+              {/* The input field for the time
+              The type of the input is text
+              The id and name of the input field are both 'time'
+              The current value of the input field is formData.time
+              When the input field changes, handleInputChange is called
+              The input field has some CSS classes for styling */}
               <input
                 type="text"
                 id="time"
@@ -133,18 +133,18 @@ export default function HangoutModal({ show, onHide }) {
                 className="border border-gray-300 rounded-md p-2 w-full mt-1"
               />
             </div>
-            // A div that contains an input field for the place
+            {/* A div that contains an input field for the place */}
             <div className="mb-4">
-              // The label for the place input field
+              {/* The label for the place input field */}
               <label htmlFor="place" className="block text-sm font-medium">
                 Place
               </label>
-              // The input field for the place
-              // The type of the input is text
-              // The id and name of the input field are both 'place'
-              // The current value of the input field is formData.place
-              // When the input field changes, handleInputChange is called
-              // The input field has some CSS classes for styling
+              {/* The input field for the place
+              The type of the input is text
+              The id and name of the input field are both 'place'
+              The current value of the input field is formData.place
+              When the input field changes, handleInputChange is called
+              The input field has some CSS classes for styling */}
               <input
                 type="text"
                 id="place"
@@ -154,18 +154,18 @@ export default function HangoutModal({ show, onHide }) {
                 className="border border-gray-300 rounded-md p-2 w-full mt-1"
               />
             </div>
-            // Contains an input field for the description
+            {/* Contains an input field for the description */}
             <div className="mb-4">
-              // The label for the description input field
+              {/* The label for the description input field */}
               <label htmlFor="description" className="block text-sm font-medium">
                 Description
               </label>
-              // The textarea for the description
-              // The id and name of the textarea are both 'description'
-              // The current value of the textarea is formData.description
-              // When the textarea changes, handleInputChange is called
-              // The textarea has some CSS classes for styling
-              // The textarea has 4 rows and does not allow resizing
+              {/* The textarea for the description
+              The id and name of the textarea are both 'description'
+              The current value of the textarea is formData.description
+              When the textarea changes, handleInputChange is called
+              The textarea has some CSS classes for styling
+              The textarea has 4 rows and does not allow resizing */}
               <textarea
                 id="description"
                 name="description"
@@ -175,16 +175,16 @@ export default function HangoutModal({ show, onHide }) {
                 rows="4"
               ></textarea>
             </div>
-            // A div that contains a submit button
+            {/* A div that contains a submit button */}
             <div className="flex justify-center">
-              // The submit button
-              // When clicked, it submits the form
-              // The button has some CSS classes for styling
+              {/* The submit button
+              When clicked, it submits the form
+              The button has some CSS classes for styling */}
               <button
                 type="submit"
                 className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
               >
-                Create Hangout
+                {/* Create Hangout */}
               </button>
             </div>
           </form>
