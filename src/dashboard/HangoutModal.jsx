@@ -10,11 +10,31 @@ export default function HangoutModal({ show, onHide }) {
     description: '',
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here, e.g., send data to backend
-    console.log(formData);
-    onHide(); // Close the modal after form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await fetch('http://localhost:8096/api/v1/schedule/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      console.log(data);
+      // handle success
+      alert('Hangout created successfully'); // Show a success message
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+      // handle error
+      alert('Error creating hangout: ' + error.message); // Show an error message
+    }
   };
 
   const handleInputChange = (e) => {
