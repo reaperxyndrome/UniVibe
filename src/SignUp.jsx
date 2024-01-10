@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "./StaticNavbar";
 import Footer from "./Footer";
-import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import 'firebase/database'
-import { useNavigate } from "react-router-dom";
-import { set } from "firebase/database";
+// import { auth } from "./firebase";
+// import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+// import 'firebase/database'
+// import { useNavigate } from "react-router-dom";
+// import { set } from "firebase/database";
 
 
 function SignUp() {
-    // wololololololo
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -23,55 +22,40 @@ function SignUp() {
         ...prevData,
         [name]: value,
         }));
+        console.log(formData)
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // You can handle form submission here, e.g., send data to an API or perform validation
-        console.log('Form submitted:', formData);
-        // Reset the form after submission
-        setFormData({
-        fullName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        fetch('http://localhost:8094/api/v1/auth/sign-up', { // Replace '/api/signup' with your API endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: formData.fullName,
+                email: formData.email,
+                password: formData.password,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Reset the form after successful submission
+            setFormData({
+                fullName: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
         });
     };
 
 
-
-
-    const [email, setEmail] = useState(''); 
-    const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
-    const navigate= useNavigate();
-
-    const signup =(e)=>{
-        //
-        e.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            console.log(userCredential);
-            // ...
-        }).catch((error) => {
-            console.log(error);
-        });
-        navigate('/dashboard');
-        // TODO unable to redirect to dashboard 
-        //(cannot call redirect function after submitting form)
-        // useEffect(()=>{
-        //     const unsubscribe= onAuthStateChanged(auth, (user) => {
-        //         setCurrentUser(user)
-        //         setLoading(false)
-        //     })
-        //       return unsubscribe;
-        // },[])
-    
-        
-
-        //return redirect()
-    }
 
 
     return (
@@ -79,7 +63,7 @@ function SignUp() {
         <Navbar></Navbar>
         <main className="flex flex-col items-center flex-grow w-[480px] mx-auto mt-10 px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold mb-8">Sign Up</h2>
-            <form onSubmit={signup} className="w-full space-y-6">
+            <form onSubmit={handleSubmit} className="w-full space-y-6">
             <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-white">
                 Full Name
@@ -88,8 +72,8 @@ function SignUp() {
                 type="text"
                 name="fullName"
                 id="fullName"
-                value={username}
-                onChange={(e)=>setUsername(e.target.value)}
+                value={formData.fullName}
+                onChange={handleChange}
                 className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
@@ -102,8 +86,8 @@ function SignUp() {
                 type="email"
                 name="email"
                 id="email"
-                value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
@@ -116,8 +100,8 @@ function SignUp() {
                 type="password"
                 name="password"
                 id="password"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleChange}
                 className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
