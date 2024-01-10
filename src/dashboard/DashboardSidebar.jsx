@@ -21,9 +21,9 @@ function DashboardSidebar() {
   return (
     // Contains all the elements of the sidebar
     <div className="h-screen w-48 bg-gray-800 text-white">
-      // This is an element that contains the navigation links
+      {/* This is an element that contains the navigation links */}
       <nav className="flex flex-col text-xl">
-        // The SideLink component is used to create navigation links
+        {/* The SideLink component is used to create navigation links */}
         <SideLink href="/dashboard" name="Dashboard"></SideLink>
         <SideLink href="/dashboard/communities" name="Communities"></SideLink>
         <SideLink href="/dashboard/hangout" name="Hangout"></SideLink>
