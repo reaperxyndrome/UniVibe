@@ -24,11 +24,13 @@ export default function HangoutModal({ show, onHide }) {
   };
 
   return (
-    <Modal show={show} onHide={onHide} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>New Hangout</Modal.Title>
+    <div>
+    <Modal show={show} onHide={onHide}>
+      <Modal.Header closeButton className="text-center">
+        <Modal.Title className=''>New Hangout</Modal.Title> 
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body 
+      className="flex flex-col w-full items-center bg-white rounded-lg shadow-xl p-8 overflow-auto z-50">
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="hangoutName">
             <Form.Label>Name</Form.Label>
@@ -84,6 +86,7 @@ export default function HangoutModal({ show, onHide }) {
         </Form>
       </Modal.Body>
     </Modal>
+    </div>
   );
 }
 

@@ -73,7 +73,7 @@ export default function Hangout() {
             <HangoutCard></HangoutCard>
             <HangoutCard></HangoutCard>
             <HangoutCard></HangoutCard>
-            <button onClick={handleShowModal}>Create Host</button>
+            <button class="rounded-md focus:outline-none text-white text-base md:text-xl px-4 py-3 md:px-6 md:py-4 mx-auto mt-2 bg-blue-800 cursor-pointer" onClick={handleShowModal}>Create Host</button>
             <HangoutModal show={showModal} onHide={handleCloseModal} />
         
           </div>
