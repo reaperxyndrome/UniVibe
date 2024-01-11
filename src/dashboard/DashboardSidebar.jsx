@@ -20,7 +20,7 @@ function DashboardSidebar() {
         <SideLink href="/dashboard" name="Dashboard"></SideLink>
         <SideLink href="/dashboard/communities" name="Communities"></SideLink>
         <SideLink href="/dashboard/hangout" name="Hangout"></SideLink>
-        <SideLink href="/dashboard/friends" name="Friends"></SideLink>
+        {/* <SideLink href="/dashboard/friends" name="Friends"></SideLink> */}
         <SideLink href="/dashboard/generalchat" name="General Chat"></SideLink>
       </nav>
     </div>
