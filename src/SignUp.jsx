@@ -6,7 +6,8 @@ import Footer from "./Footer";
 // import 'firebase/database'
 // import { useNavigate } from "react-router-dom";
 // import { set } from "firebase/database";
-
+import {useNavigate} from "react-router-dom"
+// import { useNavigate } from "react-router-dom";
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -15,6 +16,8 @@ function SignUp() {
         password: '',
         confirmPassword: '',
     });
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,34 +28,42 @@ function SignUp() {
         console.log(formData)
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // You can handle form submission here, e.g., send data to an API or perform validation
-        fetch('http://localhost:8094/api/v1/auth/sign-up', { // Replace '/api/signup' with your API endpoint
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: formData.fullName,
-                email: formData.email,
-                password: formData.password,
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
+        try {
+            console.log("hello")
+            const response = await fetch('http://localhost:8094/api/v1/auth/sign-up', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: formData.fullName,
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
+            console.log("hello2")
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response;
+            // console.log(data)
             console.log('Success:', data);
+    
             // Reset the form after successful submission
             setFormData({
                 fullName: '',
                 email: '',
                 password: '',
-                confirmPassword: '',
+                // confirmPassword: '',
             });
-        })
-        .catch((error) => {
+    
+            navigate("/signin");
+        } catch (error) {
             console.error('Error:', error);
-        });
+        }
     };
 
 
