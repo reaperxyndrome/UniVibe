@@ -5,7 +5,7 @@ import Footer from '../Footer';
 
 import {firestore} from "../firebase.js"
 import {doc, getDoc} from "firebase/firestore"
-
+import Cookies from 'js-cookie';
 
 import PropTypes from 'prop-types';
 ProfileHeader.propTypes = {
@@ -77,7 +77,34 @@ ProfileBody.propTypes = {
 	handleCancel: PropTypes.func.isRequired,
 }
 
+async function fetchUserId(username) {
+    try {
+        const response = await fetch(`http://localhost:8094/api/v1/user/by-usernames?usernames=${username}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        });
+        const data = await response.json();
+        const userId = data[0].id;
+        console.log('Success:', userId);
+        return userId;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
 
+const GetUserIdFromCookie = async () => {
+	try {
+		const username  = Cookies.get("username");
+		const userId = await fetchUserId(username);
+		return userId;
+	} catch (error) {
+		console.error('Error:', error);
+	}
+  }
 
 function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, handleSave, handleCancel}){
 	const fields = [
@@ -136,7 +163,11 @@ function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, hand
 }
 
 const getProfileFirebase = async () => {
-	const docRef = doc(firestore, "Users", "test")
+	const userId = await GetUserIdFromCookie()
+	const userIdString = userId.toString()
+	console.log(userIdString)
+	const docRef = doc(firestore, "Users", userIdString)
+	// const docRef = doc(firestore, "Users", "test")
 	const docSnap = await getDoc(docRef)
 	// console.log(docSnap.data())
 	const document = docSnap.data()
