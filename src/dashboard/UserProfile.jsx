@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
 import Footer from '../Footer';
+
+import {firestore} from "../firebase.js"
+import {doc, getDoc} from "firebase/firestore"
+
 
 import PropTypes from 'prop-types';
 ProfileHeader.propTypes = {
@@ -74,15 +78,16 @@ ProfileBody.propTypes = {
 }
 
 
+
 function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, handleSave, handleCancel}){
 	const fields = [
 		{ label: 'Binusian ID', value: 'binusian_id' },
 		{ label: 'Major', value: 'major' },
 		{ label: 'Binus branch', value: 'binus_branch' },
-		{ label: 'Date of Birth', value: 'dateOfBirth' },
-		{ label: 'Joined at', value: 'joinedDate' },
+		// { label: 'Date of Birth', value: 'dateOfBirth' },
+		// { label: 'Joined at', value: 'joinedDate' },
 		{ label: 'Email', value: 'email' },
-		{ label: 'Password', value: 'password' },
+		// { label: 'Password', value: 'password' },
 		{ label: 'Location', value: 'location' },
 		{ label: 'Interests', value: 'interests', isList: true },
 		{ label: 'Age', value: 'age' },
@@ -96,13 +101,13 @@ function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, hand
 					<input
 						type="text"
 						name={field.value}
-						value={field.isList ? editedUser[field.value].join(', ') : editedUser[field.value]}
+						value={field.isList ? editedUser[field.value] : editedUser[field.value]}
 						onChange={handleInputChange}
 						className='w-[257px]'
 					/>
 					) : (
-					<p className='w-[210px]'>
-						{field.isList ? editedUser[field.value].join(', ') : editedUser[field.value]}
+					<p className='w-[210px] text-black'>
+						{field.isList ? editedUser[field.value] : editedUser[field.value]}
 					</p>
 					)}
 				</div>
@@ -129,27 +134,58 @@ function ProfileBody({editedUser, isEditing, handleEdit, handleInputChange, hand
 		</div>
 	)
 }
-function UserProfile() {
-  const [user, setUser] = useState({
-    profilePicture: 'https://via.placeholder.com/150', // Replace with actual image URL
-    username: 'John Doe',
-	dateOfBirth: '1990-01-01',
-	joinedDate: '2020-01-01',
-	password: "**********",
-    bio: 'Frontend Developer | Lover of React',
-	occupation: "Web developer",
-	age: 35,
-	binusian_id: "23456789",
-	major: "Computer Science",
-	binus_branch: "Senayan",
-    email: 'johndoe@example.com',
-    location: 'New York, USA',
-    interests: ['React', 'JavaScript', 'Web Development'],
-    // Add more mock data as needed
-  });
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedUser, setEditedUser] = useState({ ...user });
+const getProfileFirebase = async () => {
+	const docRef = doc(firestore, "Users", "test")
+	const docSnap = await getDoc(docRef)
+	// console.log(docSnap.data())
+	const document = docSnap.data()
+	console.log(document)
+	return document
+	
+}
+
+function UserProfile() {
+	const [user, setUser] = useState({
+		// profilePicture: 'https://via.placeholder.com/150', // Replace with actual image URL
+		username: 'John Doe',
+		// dateOfBirth: '1990-01-01',
+		// joinedDate: '2020-01-01',
+		// password: "**********",
+		// bio: 'Frontend Developer | Lover of React',
+		// occupation: "Web developer",
+		age: 35,
+		binusian_id: "23456789",
+		major: "Computer Science",
+		binus_branch: "Senayan",
+		email: 'johndoe@example.com',
+		location: 'New York, USA',
+		interests: 'React, JavaScript, Web Development',
+		// Add more mock data as needed
+	});
+
+	const [isEditing, setIsEditing] = useState(false);
+	const [editedUser, setEditedUser] = useState({ ...user });
+	
+	useEffect(() => {
+		// getUsername().then((username) => setUsername(username))
+		getProfileFirebase().then(
+			(document) => setUser(document)
+		)
+		getProfileFirebase().then(
+			(document) => setEditedUser(document)
+		)
+		// setEditedUser((prevUser) => ({...prevUser}))
+
+	}, [])
+	
+	useEffect(() => {
+		console.log(user)
+		console.log(editedUser)
+	}, [user, editedUser])
+	
+
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
