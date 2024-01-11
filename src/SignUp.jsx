@@ -11,9 +11,27 @@ import {useNavigate} from "react-router-dom"
 import {firestore} from "./firebase.js"
 import {doc, setDoc} from "firebase/firestore"
 
+async function fetchUserId(username) {
+    try {
+        const response = await fetch(`http://localhost:8094/api/v1/user/by-usernames?usernames=${username}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        });
+        const data = await response.json();
+        const userId = data[0].id;
+        console.log('Success:', userId);
+        return userId;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+  }
 function SignUp() {
     const [formData, setFormData] = useState({
-        fullName: '',
+        username: '',
         email: '',
         password: '',
         age: '',
@@ -37,12 +55,15 @@ function SignUp() {
         console.log(formData)
     };
 
-    const sendUserDataFirebase = async (e) => {
+    const sendUserDataFirebase = async (userId) => {
         try {
             // e.preventDefault();
+            console.log(userId)
+            const userIdString = userId.toString()
+            console.log(userIdString)
     
-            await setDoc(doc(firestore,"Users", "test"),{
-                username: formData.fullName,
+            await setDoc(doc(firestore,"Users", userIdString),{
+                username: formData.username,
                 email:formData.email,
                 age : formData.age,
                 binus_branch: formData.binus_branch,
@@ -66,7 +87,7 @@ function SignUp() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: formData.fullName,
+                    username: formData.username,
                     email: formData.email,
                     password: formData.password,
                 }),
@@ -79,7 +100,7 @@ function SignUp() {
             const data = await response;
             // console.log(data)
             console.log('Success:', data);
-    
+            // return userId
             // Reset the form after successful submission
             // setFormData({
             //     fullName: '',
@@ -97,44 +118,13 @@ function SignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // try {
-        //     console.log("hello")
-        //     const response = await fetch('http://localhost:8094/api/v1/auth/sign-up', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             username: formData.fullName,
-        //             email: formData.email,
-        //             password: formData.password,
-        //         }),
-        //     });
-        //     console.log("hello2")
-    
-        //     if (!response.ok) {
-        //         throw new Error(`HTTP error! status: ${response.status}`);
-        //     }
-        //     const data = await response;
-        //     // console.log(data)
-        //     console.log('Success:', data);
-    
-        //     // Reset the form after successful submission
-        //     // setFormData({
-        //     //     fullName: '',
-        //     //     email: '',
-        //     //     password: '',
-        //     //     // confirmPassword: '',
-        //     // });
-    
-        //     navigate("/signin");
-            
-        // } catch (error) {
-        //     console.error('Error:', error);
-        // }
         try {
             await MySQLSignUp();
-            await sendUserDataFirebase();
+            const userId = await fetchUserId(formData.username)
+            // const userId2 = toString(userId)
+            await console.log(userId)
+            await sendUserDataFirebase(userId);
+            
             // navigate("/signin");
         } catch (error) {
             console.error('Error:', error);
@@ -152,14 +142,14 @@ function SignUp() {
             <h2 className="text-3xl font-semibold mb-8">Sign Up</h2>
             <form onSubmit={handleSubmit} className="w-full space-y-6">
             <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-white">
-                Full Name
+                <label htmlFor="username" className="block text-sm font-medium text-white">
+                Username
                 </label>
                 <input
                 type="text"
-                name="fullName"
-                id="fullName"
-                value={formData.fullName}
+                name="username"
+                id="username"
+                value={formData.username}
                 onChange={handleChange}
                 className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
