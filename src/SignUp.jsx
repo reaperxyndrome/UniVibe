@@ -8,6 +8,8 @@ import Footer from "./Footer";
 // import { set } from "firebase/database";
 import {useNavigate} from "react-router-dom"
 // import { useNavigate } from "react-router-dom";
+import {firestore} from "./firebase.js"
+import {doc, setDoc} from "firebase/firestore"
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ function SignUp() {
         password: '',
         age: '',
         binus_branch: '',
+        binusian_id: 0,
         first_name: '',
         last_name: '',
         interests: '',
@@ -34,8 +37,27 @@ function SignUp() {
         console.log(formData)
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const sendUserDataFirebase = async (e) => {
+        try {
+            // e.preventDefault();
+    
+            await setDoc(doc(firestore,"Users", "test"),{
+                username: formData.fullName,
+                email:formData.email,
+                age : formData.age,
+                binus_branch: formData.binus_branch,
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                interests: formData.interests,
+                major: formData.major,
+                binusian_id: formData.binusian_id
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    const MySQLSignUp = async () => {
         try {
             console.log("hello")
             const response = await fetch('http://localhost:8094/api/v1/auth/sign-up', {
@@ -59,17 +81,65 @@ function SignUp() {
             console.log('Success:', data);
     
             // Reset the form after successful submission
-            setFormData({
-                fullName: '',
-                email: '',
-                password: '',
-                // confirmPassword: '',
-            });
+            // setFormData({
+            //     fullName: '',
+            //     email: '',
+            //     password: '',
+            //     // confirmPassword: '',
+            // });
     
-            navigate("/signin");
+            
+            
         } catch (error) {
             console.error('Error:', error);
         }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // try {
+        //     console.log("hello")
+        //     const response = await fetch('http://localhost:8094/api/v1/auth/sign-up', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             username: formData.fullName,
+        //             email: formData.email,
+        //             password: formData.password,
+        //         }),
+        //     });
+        //     console.log("hello2")
+    
+        //     if (!response.ok) {
+        //         throw new Error(`HTTP error! status: ${response.status}`);
+        //     }
+        //     const data = await response;
+        //     // console.log(data)
+        //     console.log('Success:', data);
+    
+        //     // Reset the form after successful submission
+        //     // setFormData({
+        //     //     fullName: '',
+        //     //     email: '',
+        //     //     password: '',
+        //     //     // confirmPassword: '',
+        //     // });
+    
+        //     navigate("/signin");
+            
+        // } catch (error) {
+        //     console.error('Error:', error);
+        // }
+        try {
+            await MySQLSignUp();
+            await sendUserDataFirebase();
+            // navigate("/signin");
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
     };
 
 
@@ -123,21 +193,7 @@ function SignUp() {
                 required
                 />
             </div>
-            {/* <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-white">
-                Confirm Password
-                </label>
-                <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required
-                />
-            </div> */}
-            {/* <div>
+            <div>
                 <label htmlFor="age" className="block text-sm font-medium text-white">
                 Age
                 </label>
@@ -160,6 +216,20 @@ function SignUp() {
                 name="binus_branch"
                 id="binus_branch"
                 value={formData.binus_branch}
+                onChange={handleChange}
+                className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+                />
+            </div>
+            <div>
+                <label htmlFor="binus_branch" className="block text-sm font-medium text-white">
+                Binusian Id
+                </label>
+                <input
+                type="text"
+                name="binusian_id"
+                id="binusian_id"
+                value={formData.binusian_id}
                 onChange={handleChange}
                 className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
@@ -220,7 +290,7 @@ function SignUp() {
                 className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
-            </div> */}
+            </div>
             <div>
                 <button
                 type="submit"
