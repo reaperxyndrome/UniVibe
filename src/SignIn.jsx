@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./StaticNavbar";
 import Footer from "./Footer";
+import Cookies from 'js-cookie';
 
 function SignIn() {
     
@@ -18,9 +19,7 @@ function SignIn() {
         console.log(formData)
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // You can handle form submission here, e.g., send data to an API or perform validation
+    const LoginUserServer = () => {
         fetch('http://localhost:8094/api/v1/auth/login', { // Replace '/api/signup' with your API endpoint
             method: 'POST',
             headers: {
@@ -34,6 +33,9 @@ function SignIn() {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            Cookies.set('token', data.token)
+            Cookies.set('role', data.role)
+            Cookies.set('username', data.username)
             // Reset the form after successful submission
             setFormData({
                 username: '',
@@ -43,6 +45,12 @@ function SignIn() {
         .catch((error) => {
             console.error('Error:', error);
         });
+        
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // You can handle form submission here, e.g., send data to an API or perform validation
+        LoginUserServer()
         console.log('Form submitted:', formData);
         // Reset the form after submission
         setFormData({

@@ -1,25 +1,92 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import Cookies from "js-cookie";
+import {useEffect} from 'react';
+
+
+async function fetchUserId(username) {
+  try {
+      const response = await fetch(`http://localhost:8094/api/v1/user/by-usernames?usernames=${username}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          }
+      });
+      const data = await response.json();
+      const userId = data[0].id;
+      console.log('Success:', userId);
+      return userId;
+  } catch (error) {
+      console.error('Error:', error);
+      throw error;
+  }
+}
 
 export default function HangoutModal({ show, onHide }) {
   const [formData, setFormData] = useState({
-    name: '',
+    title: '',
     date: '',
-    time: '',
-    place: '',
+    // time: '',
+    // place: '',
     description: '',
   });
+
+  const [userId, setUserId] = useState('')
+  
+  useEffect(() => {
+    const GetUserIdFromCookie = async () => {
+      try {
+        const username  = Cookies.get("username");
+        const userId = await fetchUserId(username);
+        return userId;
+      } catch (error) {
+          console.error('Error:', error);
+      }
+    }
+    GetUserIdFromCookie().then((userId) => setUserId(userId));
+  }, [])
+
+  const createNewHangout = async (requestBody) => {
+    try {
+      const response = await fetch('http://localhost:8096/api/v1/schedule/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Accept': 'string'
+        },
+        body: JSON.stringify(requestBody),
+      });
+      if(!response.ok) {
+        console.log('Error:', response)
+        return
+      }
+      // const data = await response;
+      // console.log('Success:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here, e.g., send data to backend
-    console.log(formData);
+    // console.log(formData);
+    const requestBody = {
+      userId: userId,
+      title: formData.title,
+      description: formData.description,
+      endAt: formData.date,
+    };
+    console.log(requestBody)
+    createNewHangout(requestBody);
     onHide(); // Close the modal after form submission
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData);
   };
 
   // TODO: fix hangout modal bug
@@ -34,14 +101,14 @@ export default function HangoutModal({ show, onHide }) {
           <h2 className="text-center text-2xl font-bold mb-6">New Hangout</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="hangoutName" className="block text-sm font-medium">
-                Name
+              <label htmlFor="hangoutTitle" className="block text-sm font-medium">
+                Title
               </label>
               <input
                 type="text"
-                id="hangoutName"
-                name="name"
-                value={formData.name}
+                id="hangoutTitle"
+                name="title"
+                value={formData.title}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md p-2 w-full mt-1"
               />
@@ -55,32 +122,6 @@ export default function HangoutModal({ show, onHide }) {
                 id="date"
                 name="date"
                 value={formData.date}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md p-2 w-full mt-1"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="time" className="block text-sm font-medium">
-                Time
-              </label>
-              <input
-                type="text"
-                id="time"
-                name="time"
-                value={formData.time}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md p-2 w-full mt-1"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="place" className="block text-sm font-medium">
-                Place
-              </label>
-              <input
-                type="text"
-                id="place"
-                name="place"
-                value={formData.place}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md p-2 w-full mt-1"
               />
