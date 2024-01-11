@@ -1,9 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getAuth} from "firebase/auth"
-import { getDatabase } from "firebase/database";
-import { json } from "react-router-dom";
+import {GoogleAuthProvider, getAuth} from "firebase/auth"
+import { getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -11,21 +10,28 @@ import { json } from "react-router-dom";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 //TODO fix firebase connection error
+
+import firebase from "firebase/compat/app"
+import 'firebase/compat/firestore';
+
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID
+  apiKey: "AIzaSyC3LbcjBVKoIQSgtVkYFuHl-hifL1nqFKk",
+  authDomain: "univibe-c75b3.firebaseapp.com",
+  projectId: "univibe-c75b3",
+  storageBucket: "univibe-c75b3.appspot.com",
+  messagingSenderId: "1086854947676",
+  appId: "1:1086854947676:web:fe6fbffedaafb1d24cd799",
+  measurementId: "G-RPP2GP2K11"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const auth = getAuth(app)
-const db = getDatabase(app);
+
+
+export const auth = getAuth()
+export const provider= new GoogleAuthProvider()
+export const firestore = getFirestore();
 //firebase authentication
-export {auth, db}

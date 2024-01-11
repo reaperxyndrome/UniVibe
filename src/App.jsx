@@ -13,6 +13,15 @@ import UserProfile from './dashboard/UserProfile';
 import NotificationPage from './dashboard/Notification';
 import Communities from './dashboard/Communities';
 import Hangout from './dashboard/Hangout';
+import SignInCommunities from './SignInCommunities';
+
+import GamingCommunity from './dashboard/communityChatRoom/GamingCommunity';
+import Anime from './dashboard/communityChatRoom/Anime'
+import Sports from './dashboard/communityChatRoom/sports';
+import Study from './dashboard/communityChatRoom/Study';
+import Music from './dashboard/communityChatRoom/Music';
+import Business from './dashboard/communityChatRoom/Business';
+import ChatRoom from './dashboard/communityChatRoom/ChatRoom';
 
 function App() {
   // something
@@ -29,6 +38,18 @@ function App() {
         <Route path='/dashboard/notification' element={<NotificationPage/>}/>
         <Route path='/dashboard/communities' element={<Communities/>}/>
         <Route path='/dashboard/hangout' element={<Hangout/>}/>
+        <Route path='/chatroom/signin' element={<SignInCommunities/>}/>
+
+        
+        <Route path='/dashboard/generalchat' element={<ChatRoom/>}/>
+        <Route path='/dashboard/gamechat' element={<GamingCommunity/>}/>
+        <Route path='/dashboard/anime' element={<Anime/>}/>
+        <Route path='/dashboard/sports' element={<Sports/>}/>
+        <Route path='/dashboard/business' element={<Business/>}/>
+        <Route path='/dashboard/music' element={<Music/>}/>
+        <Route path='/dashboard/study' element={<Study/>}/>
+
+        
       </Routes>
     </>
     
