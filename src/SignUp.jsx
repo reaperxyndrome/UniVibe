@@ -137,7 +137,7 @@ function SignUp() {
                 required
                 />
             </div> */}
-            <div>
+            {/* <div>
                 <label htmlFor="age" className="block text-sm font-medium text-white">
                 Age
                 </label>
@@ -220,7 +220,7 @@ function SignUp() {
                 className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
                 />
-            </div>
+            </div> */}
             <div>
                 <button
                 type="submit"
