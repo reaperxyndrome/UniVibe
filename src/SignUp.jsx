@@ -14,7 +14,13 @@ function SignUp() {
         fullName: '',
         email: '',
         password: '',
-        confirmPassword: '',
+        age: '',
+        binus_branch: '',
+        first_name: '',
+        last_name: '',
+        interests: '',
+        major: ''
+        // confirmPassword: '',
     });
 
     const navigate = useNavigate()
@@ -72,7 +78,7 @@ function SignUp() {
     return (
         <div className="flex flex-col min-h-screen bg-black text-white">
         <Navbar></Navbar>
-        <main className="flex flex-col items-center flex-grow w-[480px] mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+        <main className="flex flex-col items-center flex-grow w-[480px] mx-auto mt-10 mb-20 px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold mb-8">Sign Up</h2>
             <form onSubmit={handleSubmit} className="w-full space-y-6">
             <div>
@@ -131,6 +137,90 @@ function SignUp() {
                 required
                 />
             </div> */}
+            <div>
+                <label htmlFor="age" className="block text-sm font-medium text-white">
+                Age
+                </label>
+                <input
+                type="text"
+                name="age"
+                id="age"
+                value={formData.age}
+                onChange={handleChange}
+                className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+                />
+            </div>
+            <div>
+                <label htmlFor="binus_branch" className="block text-sm font-medium text-white">
+                Binus Branch
+                </label>
+                <input
+                type="text"
+                name="binus_branch"
+                id="binus_branch"
+                value={formData.binus_branch}
+                onChange={handleChange}
+                className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+                />
+            </div>
+            <div>
+                <label htmlFor="first_name" className="block text-sm font-medium text-white">
+                First Name
+                </label>
+                <input
+                type="text"
+                name="first_name"
+                id="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+                />
+            </div>
+            <div>
+                <label htmlFor="last_name" className="block text-sm font-medium text-white">
+                Last Name
+                </label>
+                <input
+                type="text"
+                name="last_name"
+                id="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+                />
+            </div>
+            <div>
+                <label htmlFor="interests" className="block text-sm font-medium text-white">
+                Interests
+                </label>
+                <input
+                type="text"
+                name="interests"
+                id="interests"
+                value={formData.interests}
+                onChange={handleChange}
+                className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+                />
+            </div>
+            <div>
+                <label htmlFor="major" className="block text-sm font-medium text-white">
+                Major
+                </label>
+                <input
+                type="text"
+                name="major"
+                id="major"
+                value={formData.major}
+                onChange={handleChange}
+                className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+                />
+            </div>
             <div>
                 <button
                 type="submit"
