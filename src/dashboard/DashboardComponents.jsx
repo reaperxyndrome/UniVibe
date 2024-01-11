@@ -1,11 +1,14 @@
 // import * as React from "react";
 import Cookies from "js-cookie"
+import { useNavigate } from "react-router-dom";
 
 function DashboardComponents() {
+  const navigate = useNavigate();
   const handleSignOut = () => {
     Cookies.remove("token")
     Cookies.remove("role")
     Cookies.remove("username")
+    navigate("/signin")
   }
   return (
     <div className="px-10">

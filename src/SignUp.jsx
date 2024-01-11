@@ -125,7 +125,7 @@ function SignUp() {
             await console.log(userId)
             await sendUserDataFirebase(userId);
             
-            // navigate("/signin");
+            navigate("/signin");
         } catch (error) {
             console.error('Error:', error);
         }
