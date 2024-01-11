@@ -34,7 +34,7 @@ function SignUp() {
         username: '',
         email: '',
         password: '',
-        age: '',
+        age: 0,
         binus_branch: '',
         binusian_id: 0,
         first_name: '',
