@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "./StaticNavbar";
 import Footer from "./Footer";
 import Cookies from 'js-cookie';
+import {useNavigate} from "react-router-dom"
 
 function SignIn() {
     
@@ -9,6 +10,9 @@ function SignIn() {
         username: '',
         password: '',
     });
+
+    const navigate = useNavigate()
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,6 +45,7 @@ function SignIn() {
                 username: '',
                 password: '',
             });
+            navigate("/dashboard")
         })
         .catch((error) => {
             console.error('Error:', error);
