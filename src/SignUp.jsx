@@ -208,18 +208,19 @@ function SignUp() {
                     name="binus_branch"
                     value={formData.binus_branch}
                     onChange={handleChange}
+                    className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
-                    <option value="JWC Senayan">JWC Senayan</option>
-                    <option value="Binus FX Senayan">Binus FX Senayan</option>
-                    <option value="Binus SMB">Binus SMB</option>
-                    <option value="Binus Kemanggisan">Binus Kemanggisan</option>
-                    <option value="Binus Anggrek">Binus Anggrek</option>
-                    <option value="Binus Malang">Binus Malang</option>
-                    <option value="Binus Kijang">Binus Kijang</option>
-                    <option value="Binus Bandung">Binus Bandung</option>
-                    <option value="Binus Alam Sutera">Binus Alam Sutera</option>
-                    <option value="Binus Semarang">Graphic Design & New Media</option>
-                    <option value="Binus Syahdan">Binus Syahdan</option>
+                    <option className="text-black" value="JWC Senayan">JWC Senayan</option>
+                    <option className="text-black" value="Binus FX Senayan">Binus FX Senayan</option>
+                    <option className="text-black" value="Binus SMB">Binus SMB</option>
+                    <option className="text-black" value="Binus Kemanggisan">Binus Kemanggisan</option>
+                    <option className="text-black" value="Binus Anggrek">Binus Anggrek</option>
+                    <option className="text-black" value="Binus Malang">Binus Malang</option>
+                    <option className="text-black" value="Binus Kijang">Binus Kijang</option>
+                    <option className="text-black" value="Binus Bandung">Binus Bandung</option>
+                    <option className="text-black" value="Binus Alam Sutera">Binus Alam Sutera</option>
+                    <option className="text-black" value="Binus Semarang">Graphic Design & New Media</option>
+                    <option className="text-black" value="Binus Syahdan">Binus Syahdan</option>
                 </select>
                 {/* <input
                 type="text"
@@ -297,18 +298,19 @@ function SignUp() {
                     name="major"
                     value={formData.major}
                     onChange={handleChange}
+                    className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
-                    <option value="Business Information System">Business Information System</option>
-                    <option value="Business Management & Marketing">Business Management & Marketing</option>
-                    <option value="Communication">Communication</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Digital Business">Digital Business</option>
-                    <option value="Finance">Finance</option>
-                    <option value="International Business">International Business</option>
-                    <option value="Fashion Design">Fashion Design</option>
-                    <option value="Fashion Management">Fashion Management</option>
-                    <option value="Graphic Design & New Media">Graphic Design & New Media</option>
-                    <option value="Interactive Digital Media">Interactive Digital Media</option>
+                    <option className="text-black" value="Business Information System">Business Information System</option>
+                    <option className="text-black" value="Business Management & Marketing">Business Management & Marketing</option>
+                    <option className="text-black" value="Communication">Communication</option>
+                    <option className="text-black" value="Computer Science">Computer Science</option>
+                    <option className="text-black" value="Digital Business">Digital Business</option>
+                    <option className="text-black" value="Finance">Finance</option>
+                    <option className="text-black" value="International Business">International Business</option>
+                    <option className="text-black" value="Fashion Design">Fashion Design</option>
+                    <option className="text-black" value="Fashion Management">Fashion Management</option>
+                    <option className="text-black" value="Graphic Design & New Media">Graphic Design & New Media</option>
+                    <option className="text-black" value="Interactive Digital Media">Interactive Digital Media</option>
                 </select>
                 {/* <input
                 type="text"
