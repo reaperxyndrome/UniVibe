@@ -163,6 +163,7 @@ function SignUp() {
                 type="email"
                 name="email"
                 id="email"
+                pattern=".+@binus\.ac\.id$"
                 value={formData.email}
                 onChange={handleChange}
                 className="text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -191,6 +192,7 @@ function SignUp() {
                 type="text"
                 name="age"
                 id="age"
+                pattern="[0-9]+"
                 value={formData.age}
                 onChange={handleChange}
                 className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -219,6 +221,7 @@ function SignUp() {
                 type="text"
                 name="binusian_id"
                 id="binusian_id"
+                pattern="[0-9]+"
                 value={formData.binusian_id}
                 onChange={handleChange}
                 className=" text-black h-7 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
